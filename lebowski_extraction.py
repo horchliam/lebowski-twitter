@@ -1,6 +1,8 @@
 import cv2
 import os
 
+movie = '' #Location of The Big Lebowski film
+
 def frameCapture(path):
     video = cv2.VideoCapture(path)
     count = 0
@@ -25,5 +27,5 @@ if not os.path.exists('unused_imgs'):
 
 os.chdir('/Users/liamhorch/Desktop/my_bot_polished/unused_imgs')
 clearFolder('/Users/liamhorch/Desktop/my_bot_polished/unused_imgs')
-frameCapture('/Users/liamhorch/Desktop/my_bot_polished/Popcornarchive-theBigLebowski1998_rng96.mp4')
+frameCapture(movie)
 print('Finished!')
