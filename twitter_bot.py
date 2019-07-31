@@ -25,7 +25,7 @@ def postPicture():
     while fileCount < 3:
         found = False
         while not found:
-            randNum = random.randint(1, len(os.listdir(disImg)) - 1)
+            randNum = random.randint(0, len(os.listdir(disImg)) - 1)
             pic = '/Users/liamhorch/Desktop/my_bot_polished/lebowski_distorted_pics/distort%d.jpg' % randNum
             if not os.path.exists(pic):
                 continue
@@ -41,9 +41,15 @@ def postPicture():
 def thankFollowers():
     followers = api.followers()
     for follower in followers:
-        folKeys = follower.__dict__
-        if folKeys['following'] == False:
-            #print('Not following ' + str(folKeys['name']))
-            #api.create_friendship(folKeys['id'])
+        folDict = follower.__dict__
+        name = str(folDict['screen_name'])
+        if folDict['following'] == False and folDict['follow_request_sent'] == False:
+            print('Not following ' + name + '. Attempting to follow...')
+            api.create_friendship(name)
+            try:
+                api.send_direct_message(name, 'Hey my fellow Dude, thanks for following me! Say lets go bowling sometime, the white russians will be on me!')
+            except:
+                print('Cannot send DM, tweepy outdated')
 
+thankFollowers()
 postPicture()
