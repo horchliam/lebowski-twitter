@@ -3,6 +3,8 @@ import time
 import os
 import random
 
+#TODO: Email me whats trending. Email my sister tweets that I think she might enjoy
+
 #TODO: A feature where the bot will thank and follow anyone who follows him, will be done every day or so
 #TODO: The current way of uploading pictures is not what I would like, a cleaner way could be to mine photos from online
 #TODO: Fix the bot so it can be left running and so it doesn't need to be run manually (rasberry pi?)
