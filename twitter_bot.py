@@ -2,6 +2,8 @@ import tweepy as tp
 import time
 import os
 import random
+from selenium import webdriver
+import smtplib
 
 #TODO: Email me whats trending. Email my sister tweets that I think she might enjoy
 
@@ -58,6 +60,15 @@ def likeRandomTweets():
     hearts = browser.find_elements_by_class_name('HeartAnimation')
     for i in hearts[:3]:
         i.click()
+        
+# Work in progress, my sister does not use twitter but I'm sure she would love these images, so I plan to email them to her
+def sendKeelyImages():
+    conn = smtplib.SMTP('smtp.gmail.com', 587)
+    conn.ehlo()
+    conn.starttls()
+    conn.login('my email', 'her email')
+    conn.sendmail('my email', 'her email', 'subject')
+    conn.quit()
 
 thankFollowers()
 postPicture()
