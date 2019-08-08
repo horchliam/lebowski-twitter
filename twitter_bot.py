@@ -82,6 +82,7 @@ def commentRandomTweets():
         comText.send_keys('Hey we should go bowling sometime.')
         time.sleep(1)
         pyautogui.hotkey('command', 'enter')
+        time.sleep(1)
     except:
         print('Uncommentable tweet')
     browser.close()
