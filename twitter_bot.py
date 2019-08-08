@@ -84,6 +84,7 @@ def commentRandomTweets():
         pyautogui.hotkey('command', 'enter')
     except:
         print('Uncommentable tweet')
+    browser.close()
         
 # Work in progress, my sister does not use twitter but I'm sure she would love these images, so I plan to email them to her
 def sendKeelyImages():
