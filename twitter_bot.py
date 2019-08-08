@@ -4,6 +4,7 @@ import os
 import random
 from selenium import webdriver
 import smtplib
+import pyautogui
 
 #TODO: Email me whats trending. Email my sister tweets that I think she might enjoy
 
@@ -96,4 +97,3 @@ def sendKeelyImages():
 thankFollowers()
 postPicture()
 commentRandomTweets()
-
