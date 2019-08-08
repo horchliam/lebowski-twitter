@@ -4,6 +4,7 @@ import os
 import random
 from selenium import webdriver
 import smtplib
+import pyautogui
 
 #TODO: Email me whats trending. Email my sister tweets that I think she might enjoy
 
@@ -53,13 +54,36 @@ def thankFollowers():
             except:
                 print('Cannot send DM, tweepy outdated')
 
-# Work in progress, writing this method is helping me learn selenium. Need to provide login info still
-def likeRandomTweets():
+# This method will comment on the most recent tweet that pertains to the topic of python
+def commentRandomTweets():
     browser = webdriver.Firefox(executable_path=r'/Users/liamhorch/Downloads/geckodriver')
-    browser.get('https://twitter.com/search?q=python')
-    hearts = browser.find_elements_by_class_name('HeartAnimation')
-    for i in hearts[:3]:
-        i.click()
+    browser.get('https://twitter.com/login')
+    userField = browser.find_element_by_css_selector('.js-username-field')
+    userField.send_keys('My username')
+    passField = browser.find_element_by_css_selector('.js-password-field')
+    # These excessive sleep calls were necessary for without them the script ran too fast for the browser
+    time.sleep(2)
+    passField.send_keys('My password')
+    time.sleep(2)
+    passField.submit()
+    time.sleep(2)
+    browser.get('https://twitter.com/search?q=python&f=live')
+    time.sleep(2)
+    # I could not find the css selector for the comment button so I instead chose to take a shot in the dark and
+    # click a preset location which always should be the location of the first tweet
+    pyautogui.moveTo(850, 220, duration = 3)
+    time.sleep(2)
+    pyautogui.mouseDown()
+    pyautogui.mouseUp()
+    try:
+        comment = browser.find_element_by_css_selector('div.r-3qxfft:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > svg:nth-child(2)')
+        comment.click()
+        comText = browser.find_element_by_css_selector('.notranslate')
+        comText.send_keys('Hey we should go bowling sometime.')
+        time.sleep(1)
+        pyautogui.hotkey('command', 'enter')
+    except:
+        print('Uncommentable tweet')
         
 # Work in progress, my sister does not use twitter but I'm sure she would love these images, so I plan to email them to her
 def sendKeelyImages():
@@ -72,3 +96,4 @@ def sendKeelyImages():
 
 thankFollowers()
 postPicture()
+commentRandomTweets()
