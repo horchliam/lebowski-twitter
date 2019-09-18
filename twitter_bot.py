@@ -97,6 +97,8 @@ def sendKeelyImages():
     conn.sendmail('my email', 'her email', 'subject')
     conn.quit()
 
-thankFollowers()
-postPicture()
-commentRandomTweets()
+while true:
+    thankFollowers()
+    postPicture()
+    commentRandomTweets()
+    time.sleep(43200)
